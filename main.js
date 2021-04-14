@@ -1,6 +1,6 @@
 const  URL =  'https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty';
 const newsRight = document.querySelector('.right-news-column');
-let displayedStories = [];
+
 
 
 fetch(URL)
@@ -13,7 +13,7 @@ fetch(URL)
     for(let id of json){
         grabStory(id);
     }
-    console.log(json);
+    // console.log(json);
 })
 
 function grabStory(newsId){
@@ -23,11 +23,9 @@ fetch(story)
 
 .then((res) => res.json())
 
-.then((obj)=> {
-    listArticle(obj);
-    
-    displayedStories.push(obj);
-    // console.log(displayedStories);
+.then((article)=> {
+    listArticle(article);
+    console.log(article);
     
 })
 }
@@ -36,10 +34,10 @@ function listArticle(article){
     let html = `<div class = "news-container">
                     <h2 class="title"><a href=${article.url}>${article.title}</a></h2>
                     <div class="subHeading">
-                    ${article.score} points | ${article.by} |  comments
+                    ${article.score} points | ${article.by} | ${article.kids.length} comments
                     </div>
                 </div>`
-
+                // console.log(article);
     newsRight.innerHTML += html;
 }
 
